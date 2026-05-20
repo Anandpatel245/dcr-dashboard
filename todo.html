@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>To-Do List - Local Storage App</title>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet">
+<style>
+:root,[data-theme="light"]{--bg:#f7f6f2;--surface:#fbfbf9;--surface2:#f3f0ec;--surface3:#edeae5;--divider:#dcd9d5;--border:#d4d1ca;--text:#28251d;--muted:#7a7974;--faint:#bab9b4;--primary:#01696f;--primary2:#0c4e54;--success:#437a22;--warning:#964219;--error:#c41e3a;--radius:18px;--shadow:0 12px 32px rgba(40,37,29,.08);--font-body:'Satoshi','Inter',sans-serif;--font-display:'General Sans','Inter',sans-serif}
+[data-theme="dark"]{--bg:#171614;--surface:#1c1b19;--surface2:#201f1d;--surface3:#22211f;--divider:#262523;--border:#393836;--text:#cdccca;--muted:#797876;--faint:#5a5957;--primary:#4f98a3;--primary2:#227f8b;--success:#6daa45;--warning:#bb653b;--error:#e74c54;--shadow:0 12px 32px rgba(0,0,0,.35)}
+*{box-sizing:border-box}html{color-scheme:light dark;scroll-behavior:smooth}body{margin:0;min-height:100vh;font-family:var(--font-body);background:var(--bg);color:var(--text);line-height:1.55}a{color:inherit}button,input,textarea{font:inherit}header,main,section,footer{display:block}.wrap{max-width:800px;margin:0 auto;padding:20px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 0;margin-bottom:24px}.brand{display:flex;align-items:center;gap:12px}.logo{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--primary),var(--primary2));box-shadow:var(--shadow);display:grid;place-items:center;color:#fff;font-weight:700;font-size:1.2rem}.title h1{margin:0;font-family:var(--font-display);font-size:1.8rem;line-height:1.1}.title p{margin:4px 0 0;color:var(--muted);font-size:.95rem}.toggle{border:1px solid var(--border);background:var(--surface);color:var(--text);border-radius:999px;padding:10px 14px;cursor:pointer;min-height:44px;transition:.18s ease}.toggle:hover{border-color:var(--primary)}.panel{background:var(--surface);border:1px solid color-mix(in oklab,var(--text) 10%, transparent);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px}.input-group{display:flex;gap:12px;margin-bottom:24px}.input-field{flex:1;display:flex;flex-direction:column}.input-field label{font-size:.85rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}.input-field input{padding:12px 14px;border:1px solid var(--border);border-radius:12px;background:var(--surface2);color:var(--text);transition:.18s ease}.input-field input:focus{outline:none;border-color:var(--primary);background:var(--surface)}.add-btn{padding:12px 20px;background:var(--primary);color:#fff;border:none;border-radius:12px;cursor:pointer;font-weight:600;transition:.18s ease;min-height:44px}.add-btn:hover{background:var(--primary2)}.add-btn:active{transform:scale(.98)}.filter-group{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}.filter-btn{padding:8px 14px;background:var(--surface2);color:var(--text);border:1px solid var(--border);border-radius:999px;cursor:pointer;transition:.18s ease;font-size:.9rem}.filter-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}.filter-btn:hover{border-color:var(--primary)}.todo-list{list-style:none;margin:0;padding:0}.todo-item{display:flex;align-items:flex-start;gap:12px;padding:14px;background:var(--surface2);border:1px solid var(--border);border-radius:14px;margin-bottom:10px;transition:.18s ease}.todo-item:hover{background:var(--surface3)}.todo-item.completed{opacity:.7}.todo-item input[type="checkbox"]{margin-top:4px;cursor:pointer;width:20px;height:20px;accent-color:var(--primary)}.todo-content{flex:1}.todo-text{margin:0 0 4px;font-size:1rem;word-break:break-word}.todo-item.completed .todo-text{text-decoration:line-through;color:var(--muted)}.todo-meta{display:flex;gap:12px;font-size:.85rem;color:var(--muted)}.todo-priority{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:4px;background:color-mix(in oklab,var(--warning) 15%, var(--surface))}.todo-priority.high{background:color-mix(in oklab,var(--error) 15%, var(--surface));color:var(--error)}.todo-date{display:inline-flex;align-items:center;gap:4px}.delete-btn{padding:6px 10px;background:var(--error);color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:.85rem;transition:.18s ease}.delete-btn:hover{opacity:.8}.empty-state{text-align:center;padding:40px 20px;color:var(--muted)}.empty-state p{margin:0;font-size:1.05rem}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px}.stat-card{background:var(--surface2);padding:14px;border-radius:12px;border:1px solid var(--border);text-align:center}.stat-card .value{font-size:1.8rem;font-weight:700;color:var(--primary)}.stat-card .label{font-size:.85rem;color:var(--muted);margin-top:4px}.clear-all{padding:10px 16px;background:var(--error);color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:.9rem;transition:.18s ease}.clear-all:hover{opacity:.8}.footer{padding:20px 0 8px;color:var(--muted);font-size:.92rem;text-align:center}@media (max-width:600px){.wrap{padding:16px}.topbar{flex-direction:column;text-align:center}.input-group{flex-direction:column}.stats{grid-template-columns:1fr}.panel{padding:16px}}
+</style>
+</head>
+<body>
+<a class="sr-only" href="#content">Skip to content</a>
+<div class="wrap">
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">✓</div>
+      <div class="title">
+        <h1>To-Do List</h1>
+        <p>Tasks saved locally on your device</p>
+      </div>
+    </div>
+    <button class="toggle" data-theme-toggle aria-label="Switch to dark mode">Theme</button>
+  </header>
+
+  <main id="content">
+    <section class="panel">
+      <div class="stats">
+        <div class="stat-card">
+          <div class="value" id="totalTasks">0</div>
+          <div class="label">Total Tasks</div>
+        </div>
+        <div class="stat-card">
+          <div class="value" id="completedTasks">0</div>
+          <div class="label">Completed</div>
+        </div>
+        <div class="stat-card">
+          <div class="value" id="pendingTasks">0</div>
+          <div class="label">Pending</div>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <div class="input-field" style="flex: 1;">
+          <label for="taskInput">Task Title</label>
+          <input type="text" id="taskInput" placeholder="What needs to be done?" autocomplete="off">
+        </div>
+        <div class="input-field" style="flex: 0 0 140px;">
+          <label for="prioritySelect">Priority</label>
+          <select id="prioritySelect" style="padding:12px 14px;border:1px solid var(--border);border-radius:12px;background:var(--surface2);color:var(--text);cursor:pointer;transition:.18s ease;">
+            <option value="low">Low</option>
+            <option value="medium" selected>Medium</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+        <div class="input-field" style="flex: 0 0 140px;">
+          <label for="dueDateInput">Due Date</label>
+          <input type="date" id="dueDateInput">
+        </div>
+        <div style="display:flex;align-items:flex-end;padding-bottom:0;">
+          <button class="add-btn" id="addTaskBtn">Add Task</button>
+        </div>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+        <div class="filter-group">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="pending">Pending</button>
+          <button class="filter-btn" data-filter="completed">Completed</button>
+          <button class="filter-btn" data-filter="high">High Priority</button>
+        </div>
+        <button class="clear-all" id="clearAllBtn">Clear All</button>
+      </div>
+
+      <ul class="todo-list" id="todoList"></ul>
+      
+      <div class="empty-state" id="emptyState" style="display:none;">
+        <p>No tasks yet. Add one to get started!</p>
+      </div>
+    </section>
+
+    <footer class="footer">Your tasks are saved automatically to your device's local storage.</footer>
+  </main>
+</div>
+
+<script>
+// Theme toggle
+(function(){const root=document.documentElement,t=document.querySelector('[data-theme-toggle]');let mode=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';root.setAttribute('data-theme',mode);const sync=()=>{t.setAttribute('aria-label','Switch to '+(mode==='dark'?'light':'dark')+' mode');t.textContent=mode==='dark'?'Light mode':'Dark mode'};sync();t.addEventListener('click',()=>{mode=mode==='dark'?'light':'dark';root.setAttribute('data-theme',mode);sync()})})();
+
+// To-Do List App
+class TodoApp {
+  constructor() {
+    this.tasks = [];
+    this.currentFilter = 'all';
+    this.storageKey = 'todoTasks';
+    this.init();
+  }
+
+  init() {
+    this.loadTasks();
+    this.setupEventListeners();
+    this.render();
+  }
+
+  setupEventListeners() {
+    const addBtn = document.getElementById('addTaskBtn');
+    const taskInput = document.getElementById('taskInput');
+    const dueDateInput = document.getElementById('dueDateInput');
+    const clearAllBtn = document.getElementById('clearAllBtn');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+
+    addBtn.addEventListener('click', () => this.addTask());
+    taskInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') this.addTask();
+    });
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        e.target.classList.add('active');
+        this.currentFilter = e.target.dataset.filter;
+        this.render();
+      });
+    });
+
+    clearAllBtn.addEventListener('click', () => {
+      if (this.tasks.length === 0) return;
+      if (confirm('Are you sure you want to delete all tasks?')) {
+        this.tasks = [];
+        this.saveTasks();
+        this.render();
+      }
+    });
+  }
+
+  addTask() {
+    const taskInput = document.getElementById('taskInput');
+    const prioritySelect = document.getElementById('prioritySelect');
+    const dueDateInput = document.getElementById('dueDateInput');
+    const taskText = taskInput.value.trim();
+
+    if (!taskText) {
+      alert('Please enter a task');
+      taskInput.focus();
+      return;
+    }
+
+    const task = {
+      id: Date.now(),
+      text: taskText,
+      completed: false,
+      priority: prioritySelect.value,
+      dueDate: dueDateInput.value || null,
+      createdAt: new Date().toISOString()
+    };
+
+    this.tasks.unshift(task);
+    this.saveTasks();
+    this.render();
+
+    taskInput.value = '';
+    prioritySelect.value = 'medium';
+    dueDateInput.value = '';
+    taskInput.focus();
+  }
+
+  deleteTask(id) {
+    this.tasks = this.tasks.filter(task => task.id !== id);
+    this.saveTasks();
+    this.render();
+  }
+
+  toggleTask(id) {
+    const task = this.tasks.find(t => t.id === id);
+    if (task) {
+      task.completed = !task.completed;
+      this.saveTasks();
+      this.render();
+    }
+  }
+
+  getFilteredTasks() {
+    switch (this.currentFilter) {
+      case 'pending':
+        return this.tasks.filter(t => !t.completed);
+      case 'completed':
+        return this.tasks.filter(t => t.completed);
+      case 'high':
+        return this.tasks.filter(t => t.priority === 'high' && !t.completed);
+      default:
+        return this.tasks;
+    }
+  }
+
+  formatDate(dateStr) {
+    if (!dateStr) return '';
+    const date = new Date(dateStr + 'T00:00:00');
+    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  }
+
+  render() {
+    const todoList = document.getElementById('todoList');
+    const emptyState = document.getElementById('emptyState');
+    const filteredTasks = this.getFilteredTasks();
+
+    // Update stats
+    const completed = this.tasks.filter(t => t.completed).length;
+    const pending = this.tasks.filter(t => !t.completed).length;
+    document.getElementById('totalTasks').textContent = this.tasks.length;
+    document.getElementById('completedTasks').textContent = completed;
+    document.getElementById('pendingTasks').textContent = pending;
+
+    // Show/hide empty state
+    if (filteredTasks.length === 0) {
+      todoList.innerHTML = '';
+      emptyState.style.display = 'block';
+      return;
+    }
+
+    emptyState.style.display = 'none';
+    todoList.innerHTML = filteredTasks.map(task => `
+      <li class="todo-item ${task.completed ? 'completed' : ''}">
+        <input type="checkbox" ${task.completed ? 'checked' : ''} onchange="app.toggleTask(${task.id})">
+        <div class="todo-content">
+          <div class="todo-text">${this.escapeHtml(task.text)}</div>
+          <div class="todo-meta">
+            <span class="todo-priority ${task.priority === 'high' ? 'high' : ''}">${task.priority.charAt(0).toUpperCase() + task.priority.slice(1)}</span>
+            ${task.dueDate ? `<span class="todo-date">📅 ${this.formatDate(task.dueDate)}</span>` : ''}
+          </div>
+        </div>
+        <button class="delete-btn" onclick="app.deleteTask(${task.id})">Delete</button>
+      </li>
+    `).join('');
+  }
+
+  saveTasks() {
+    localStorage.setItem(this.storageKey, JSON.stringify(this.tasks));
+  }
+
+  loadTasks() {
+    const stored = localStorage.getItem(this.storageKey);
+    this.tasks = stored ? JSON.parse(stored) : [];
+  }
+
+  escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+}
+
+// Initialize app
+const app = new TodoApp();
+</script>
+</body>
+</html>
