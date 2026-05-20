@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mumbai & Maharashtra DCR Dashboard</title>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet">
+<style>
+:root,[data-theme="light"]{--bg:#f7f6f2;--surface:#fbfbf9;--surface2:#f3f0ec;--surface3:#edeae5;--divider:#dcd9d5;--border:#d4d1ca;--text:#28251d;--muted:#7a7974;--faint:#bab9b4;--primary:#01696f;--primary2:#0c4e54;--success:#437a22;--warning:#964219;--radius:18px;--shadow:0 12px 32px rgba(40,37,29,.08);--font-body:'Satoshi','Inter',sans-serif;--font-display:'General Sans','Inter',sans-serif}
+[data-theme="dark"]{--bg:#171614;--surface:#1c1b19;--surface2:#201f1d;--surface3:#22211f;--divider:#262523;--border:#393836;--text:#cdccca;--muted:#797876;--faint:#5a5957;--primary:#4f98a3;--primary2:#227f8b;--success:#6daa45;--warning:#bb653b;--shadow:0 12px 32px rgba(0,0,0,.35)}
+*{box-sizing:border-box}html{color-scheme:light dark;scroll-behavior:smooth}body{margin:0;min-height:100vh;font-family:var(--font-body);background:var(--bg);color:var(--text);line-height:1.55}a{color:inherit}button,input{font:inherit}header,main,section,footer{display:block}.wrap{max-width:1200px;margin:0 auto;padding:20px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 0}.brand{display:flex;align-items:center;gap:12px}.logo{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--primary),var(--primary2));box-shadow:var(--shadow);display:grid;place-items:center;color:#fff;font-weight:700}.title h1{margin:0;font-family:var(--font-display);font-size:clamp(1.4rem,2vw,2rem);line-height:1.1}.title p{margin:4px 0 0;color:var(--muted);font-size:.95rem}.toggle{border:1px solid var(--border);background:var(--surface);color:var(--text);border-radius:999px;padding:10px 14px;cursor:pointer;min-height:44px}.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:20px;align-items:stretch;margin:18px 0 24px}.panel{background:var(--surface);border:1px solid color-mix(in oklab,var(--text) 10%, transparent);border-radius:var(--radius);box-shadow:var(--shadow)}.hero-copy{padding:28px}.hero-copy h2{margin:0 0 10px;font-family:var(--font-display);font-size:clamp(1.6rem,2.6vw,2.7rem);line-height:1.05}.hero-copy p{margin:0;color:var(--muted);max-width:65ch}.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:18px}.stat{background:var(--surface2);border:1px solid var(--border);border-radius:16px;padding:16px}.stat .k{font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}.stat .v{margin-top:6px;font-size:1.5rem;font-weight:700}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:20px}.card{grid-column:span 6;padding:20px}.card h3{margin:0 0 8px;font-size:1.05rem}.meta{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 14px}.chip{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:var(--surface2);border:1px solid var(--border);font-size:.85rem}.dot{width:8px;height:8px;border-radius:50%}.dot.ok{background:var(--success)}.dot.warn{background:var(--warning)}.list{margin:0;padding-left:18px;color:var(--text)}.list li{margin:8px 0;color:var(--muted)}.note{margin-top:14px;padding:14px;border-radius:14px;background:color-mix(in oklab,var(--primary) 10%, var(--surface));border:1px solid color-mix(in oklab,var(--primary) 18%, var(--border))}.table{width:100%;border-collapse:collapse;margin-top:8px;font-size:.95rem}.table th,.table td{padding:12px 10px;border-bottom:1px solid var(--divider);text-align:left;vertical-align:top}.table th{color:var(--muted);font-weight:600}.footer{padding:20px 0 8px;color:var(--muted);font-size:.92rem}@media (max-width:900px){.hero{grid-template-columns:1fr}.card{grid-column:span 12}.stats{grid-template-columns:1fr}}@media (prefers-reduced-motion:no-preference){.panel,.toggle{transition:.18s ease}}@media (hover:hover){.toggle:hover{border-color:var(--primary)}}
+</style>
+</head>
+<body>
+<a class="sr-only" href="#content">Skip to content</a>
+<div class="wrap">
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">D</div>
+      <div class="title">
+        <h1>Mumbai & Maharashtra DCR Dashboard</h1>
+        <p>Daily verified amendment tracker for Mumbai DCPR 2034 and Maharashtra UDCPR.</p>
+      </div>
+    </div>
+    <button class="toggle" data-theme-toggle aria-label="Switch to dark mode">Theme</button>
+  </header>
+
+  <main id="content">
+    <section class="hero">
+      <div class="panel hero-copy">
+        <h2>One view for current rules, latest verified amendments, and a clear no-change status.</h2>
+        <p>This dashboard is designed to show only officially verified updates from MCGM and Maharashtra government sources, with the email note changing daily to either a concise amendment summary or a blank-style no-update message.</p>
+      </div>
+      <div class="panel stats">
+        <div class="stat"><div class="k">Mumbai status</div><div class="v">Tracked</div></div>
+        <div class="stat"><div class="k">Maharashtra status</div><div class="v">Tracked</div></div>
+        <div class="stat"><div class="k">Last verified run</div><div class="v" id="runDate">20 May 2026</div></div>
+        <div class="stat"><div class="k">Update state</div><div class="v" id="stateText">Verified since 1 May</div></div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="panel card">
+        <h3>Sources to check daily</h3>
+        <div class="meta">
+          <span class="chip"><span class="dot ok"></span> Mumbai DCPR 2034</span>
+          <span class="chip"><span class="dot ok"></span> Maharashtra UDCPR</span>
+        </div>
+        <ul class="list">
+          <li>MCGM circulars, notifications, and related construction permit updates for Greater Mumbai.</li>
+          <li>Maharashtra government / planning authority publications for UDCPR amendments.</li>
+          <li>Only include a change when the notification is official and date-stamped.</li>
+        </ul>
+        <div class="note">Current default email note: <strong>No update today</strong>.</div>
+      </article>
+
+      <article class="panel card">
+        <h3>Daily email format</h3>
+        <table class="table">
+          <thead><tr><th>Condition</th><th>Subject</th><th>Body note</th></tr></thead>
+          <tbody>
+            <tr><td>Verified amendment found</td><td>DCR update: verified amendment</td><td>Short summary + source link(s) + effective date.</td></tr>
+            <tr><td>No change found</td><td>DCR update: no update</td><td>No update today.</td></tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="panel card">
+        <h3>Implementation plan</h3>
+        <ul class="list">
+          <li>Host this HTML on GitHub Pages or Cloudflare Pages for a stable link.</li>
+          <li>Use a scheduled job to fetch official sources once daily.</li>
+          <li>Write the latest verified result into the page and email it to anand.patel@quantumrealty.co.in.</li>
+        </ul>
+      </article>
+
+      <article class="panel card">
+        <h3>Verified updates from 1 May 2026</h3>
+        <table class="table">
+          <thead><tr><th>Date</th><th>Regulation</th><th>Status</th><th>Verified link</th></tr></thead>
+          <tbody>
+            <tr><td>6 May 2026</td><td>Mumbai DCPR 2034</td><td>Higher FSI-free space for fitness, meditation and recreational facilities, from 2% to 4% of built-up area.</td><td><a href="https://www.freepressjournal.in/mumbai/maharashtra-govt-approves-higher-fsi-exemption-for-fitness-and-recreational-facilities-in" target="_blank" rel="noopener noreferrer">Report</a></td></tr>
+            <tr><td>28 Apr 2026</td><td>Mumbai DCPR 2034</td><td>Sub-9m road height-relaxation proposal cleared by Improvements Committee, pending state approval.</td><td><a href="https://credaimchi.com/mumbai-high-rises-narrow-roads-dcpr-2034.html" target="_blank" rel="noopener noreferrer">Summary</a></td></tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="panel card">
+        <h3>Verified amendment log</h3>
+        <ul class="list" id="log">
+          <li>No verified amendment stored yet.</li>
+        </ul>
+      </article>
+    </section>
+
+    <footer class="footer">Built for daily operational monitoring. Update the log only after official verification.</footer>
+  </main>
+</div>
+<script>
+(function(){const root=document.documentElement,t=document.querySelector('[data-theme-toggle]');let mode=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';root.setAttribute('data-theme',mode);const sync=()=>{t.setAttribute('aria-label','Switch to '+(mode==='dark'?'light':'dark')+' mode');t.textContent=mode==='dark'?'Light mode':'Dark mode'};sync();t.addEventListener('click',()=>{mode=mode==='dark'?'light':'dark';root.setAttribute('data-theme',mode);sync()})})();
+</script>
+</body>
+</html>
