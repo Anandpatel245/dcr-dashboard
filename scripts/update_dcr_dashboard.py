@@ -78,7 +78,7 @@ class DCRDashboardUpdater:
         # Check if this is truly new (not already in dashboard)
         # by comparing with stored state
         last_processed = self.state.get('last_verified_date')
-        if newest['date'] > last_processed:
+        if newest['date'] > (last_processed or ''):
             print(f"✓ Found new verified entry: {newest['date']} - {newest['regulation']}")
             return newest
         else:
@@ -97,7 +97,7 @@ class DCRDashboardUpdater:
             with open(DASHBOARD_FILE, 'r', encoding='utf-8') as f:
                 html_content = f.read()
             
-            soup = BeautifulSoup(html_content, 'lxml')
+            soup = BeautifulSoup(html_content, 'html.parser')
             
             # Update last verified run date
             run_date_elem = soup.find(id='runDate')
@@ -120,7 +120,7 @@ class DCRDashboardUpdater:
             
             # Write updated HTML
             with open(DASHBOARD_FILE, 'w', encoding='utf-8') as f:
-                f.write(str(soup.prettify()))
+                f.write(str(soup))
             
             print("   ✓ HTML updated successfully")
         
@@ -136,36 +136,48 @@ class DCRDashboardUpdater:
         if not verified_entries:
             return
         
-        # Find the verified updates table
-        table = soup.find('table', {'class': 'table'})
-        if not table:
+        # Find table by looking for the one with verification data
+        tables = soup.find_all('table', {'class': 'table'})
+        if len(tables) < 2:
             print("   ⚠️  Verified updates table not found")
             return
         
+        # Second table is the verified updates table
+        table = tables[1]
         tbody = table.find('tbody')
         if not tbody:
-            tbody = BeautifulSoup('', 'lxml').new_tag('tbody')
+            tbody = soup.new_tag('tbody')
             table.append(tbody)
         
-        # Clear existing rows (keep header)
+        # Clear existing rows
         for row in tbody.find_all('tr'):
             row.decompose()
         
         # Add verified entries
         for entry in verified_entries:
-            row = BeautifulSoup('', 'lxml').new_tag('tr')
+            row = soup.new_tag('tr')
             
-            cells = [
-                entry['date'],
-                entry['regulation'],
-                entry['status'],
-                f'<a href="{entry["verified_link"]}" target="_blank" rel="noopener noreferrer">Report</a>'
-            ]
+            # Date cell
+            td_date = soup.new_tag('td')
+            td_date.string = entry['date']
+            row.append(td_date)
             
-            for cell_content in cells:
-                td = BeautifulSoup('', 'lxml').new_tag('td')
-                td.append(BeautifulSoup(cell_content, 'lxml'))
-                row.append(td)
+            # Regulation cell
+            td_reg = soup.new_tag('td')
+            td_reg.string = entry['regulation']
+            row.append(td_reg)
+            
+            # Status cell
+            td_status = soup.new_tag('td')
+            td_status.string = entry['status']
+            row.append(td_status)
+            
+            # Link cell
+            td_link = soup.new_tag('td')
+            link = soup.new_tag('a', href=entry['verified_link'], target='_blank', rel='noopener noreferrer')
+            link.string = 'Report'
+            td_link.append(link)
+            row.append(td_link)
             
             tbody.append(row)
         
@@ -189,12 +201,12 @@ class DCRDashboardUpdater:
         # Add verified entries to log
         if verified_entries:
             for entry in verified_entries:
-                li = BeautifulSoup('', 'lxml').new_tag('li')
+                li = soup.new_tag('li')
                 log_text = f"{entry['date']} – {entry['regulation']}: {entry['status']}"
                 li.string = log_text
                 log_elem.append(li)
         else:
-            li = BeautifulSoup('', 'lxml').new_tag('li')
+            li = soup.new_tag('li')
             li.string = 'No verified amendments yet.'
             log_elem.append(li)
         
