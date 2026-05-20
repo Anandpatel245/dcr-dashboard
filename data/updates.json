@@ -1,0 +1,24 @@
+{
+  "updates": [
+    {
+      "id": "2026-05-06-01",
+      "date": "6 May 2026",
+      "regulation": "Mumbai DCPR 2034",
+      "status": "Higher FSI-free space for fitness, meditation and recreational facilities, from 2% to 4% of built-up area.",
+      "verified_link": "https://www.freepressjournal.in/mumbai/maharashtra-govt-approves-higher-fsi-exemption-for-fitness-and-recreational-facilities-in",
+      "source_type": "news",
+      "verified": true
+    },
+    {
+      "id": "2026-04-28-01",
+      "date": "28 Apr 2026",
+      "regulation": "Mumbai DCPR 2034",
+      "status": "Sub-9m road height-relaxation proposal cleared by Improvements Committee, pending state approval.",
+      "verified_link": "https://credaimchi.com/mumbai-high-rises-narrow-roads-dcpr-2034.html",
+      "source_type": "industry",
+      "verified": true
+    }
+  ],
+  "last_processed": "2026-05-20T00:00:00Z",
+  "notes": "Structured data source for DCR amendments. Only entries with verified=true are displayed on the dashboard."
+}
